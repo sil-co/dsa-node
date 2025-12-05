@@ -5,12 +5,16 @@ const merge = Solution.merge;
 describe("Merge Intervals", () => {
     const cases: Array<{ input: number[][], expected: number[][] }> = [
         {
+            input: [[1,3], [2,6], [8,10], [1500,1800], [3,40]],
+            expected: [[1,40], [1500,1800]]
+        },
+        {
             input: [[1, 3], [2, 6], [8, 10], [15, 18]],
             expected: [[1, 6], [8, 10], [15, 18]]
         },
         {
             input: [[1, 4], [4, 5]],
-            expected: [[1, 4]]
+            expected: [[1, 5]]
         },
         {
             input: [[1, 4], [0, 4]],
@@ -30,7 +34,7 @@ describe("Merge Intervals", () => {
         },
     ];
 
-    test.each(cases)("intervals: %j -> %j", ({ input, expected }) => {
+    test.each(cases)("Data: %j", ({ input, expected }) => {
         expect(merge(input)).toEqual(expected);
     });
 });
