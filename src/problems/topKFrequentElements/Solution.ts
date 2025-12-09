@@ -18,10 +18,6 @@ export class Solution {
      *      1. Set with Map like [{ value : times }]
      *      2. Create sortedArray
      *      3. Loop sortedArray and extract keys for top k.
-     * Result: Time:O(N log n), Space:O(N)
-     *      Good, but a little bit inefficient... because
-     *      Runtime: 85 ms Beats 5.18%
-     *      Memory: 64.52 MB Beats 13.37%
      */
     static topKFrequent(nums: number[], k: number): number[] {
         let countMap = new Map<number, number>();
@@ -39,8 +35,9 @@ export class Solution {
             const count = countMap.get(key)!;
             const newArray: number[] = [key, count];
             sortedArray.push(newArray);
-            sortedArray.sort((a, b) => b[1] - a[1]);
         }
+
+        sortedArray.sort((a, b) => b[1] - a[1]); // ⭐⭐
 
         const slicedSortedArray: number[][] = sortedArray.slice(0, k);
 
@@ -53,6 +50,50 @@ export class Solution {
         return result;
     }
 
+    /**
+     * Result: Time:O(N log n), Space:O(N)
+     *      Good, but a little bit inefficient... because
+     *      Runtime: 85 ms Beats 5.18%
+     *      Memory: 64.52 MB Beats 13.37%
+     * Why?:
+     *     because one code is very waste of process in this point (`⭐⭐`)  
+     */
+    static topKFrequentMyFirstSolution(nums: number[], k: number): number[] {
+        let countMap = new Map<number, number>();
+
+        for (let i = 0; i < nums.length; i++) {
+            if (countMap.has(nums[i])) {
+                countMap.set(nums[i], countMap.get(nums[i])! + 1)
+            } else {
+                countMap.set(nums[i], 1);
+            }
+        }
+
+        const sortedArray: number[][] = []; // [[key, value]]
+        for (const key of countMap.keys()) {
+            const count = countMap.get(key)!;
+            const newArray: number[] = [key, count];
+            sortedArray.push(newArray);
+            sortedArray.sort((a, b) => b[1] - a[1]); // ⭐⭐ 
+        }
+
+        // sortedArray.sort((a, b) => b[1] - a[1]); // ⭐⭐ best approach
+
+        const slicedSortedArray: number[][] = sortedArray.slice(0, k);
+
+        const result: number[] = [];
+
+        for (const i of slicedSortedArray) {
+            result.push(i[0]);
+        }
+
+        return result;
+    }
+
+    /**
+     * Runtime: 8 ms Beats 83.80%
+     * Memory: 60.76 MB Beats 55.12%
+     */
     static topKFrequentGPT(nums: number[], k: number): number[] {
         const map = new Map<number, number>();
 
