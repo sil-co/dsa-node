@@ -7,7 +7,6 @@ export class Solution {
      * Aim: Time:O(log n), Space:O(1)
      * Approach: 
      *      Binary Search
-     *      
      */
     static search(nums: number[], target: number): number {
         let left = 0;
@@ -16,33 +15,22 @@ export class Solution {
         while (left <= right) {
             let middle = Math.floor(left + ((right - left) / 2));
 
-            console.log({ left, middle, right });
+            if (nums[middle] === target) { return middle; }
 
-            //     nums: [9,10,0,1,4,5,6,7,8],
-            //     target: 3,
-            //     expected: -1 
-
-            if (target < nums[middle]) {
-                if (nums[left] < nums[middle]) {
-                    // sorted: left to middle
-                    if (target > nums[left]) {
-                        // target is existing in left through middle
-                        right = middle - 1;
-                    } else {
-                        // target is existing middle through right
-                        left = middle + 1;
-                    }
+            if (nums[left] <= nums[middle]) { // Left half is sorted
+                if (nums[left] <= target && target < nums[middle]) {
+                    right = middle - 1;
                 } else {
-                    // sorted: middle to right, because nums is sorted array
-                    if (target > nums[left]) {
-                        // target is existing in left through middle
-                        right = middle - 1;
-                    } else {
-                        // target is existing middle through right
-                        left = middle + 1;
-                    }
+                    left = middle + 1;
+                }
+            } else { // Right half is sorted
+                if (nums[middle] < target && target <= nums[right]) {
+                    left = middle + 1;
+                } else {
+                    right = middle - 1;
                 }
             }
+           
         }
 
         return -1;
