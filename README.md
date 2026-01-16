@@ -1,3 +1,12 @@
+## 概要
+このリポジトリは、データ構造とアルゴリズム（DSA）およびLeetCodeの問題を解くための個人練習プロジェクトです。
+
+## 技術スタック
+- Node.js（TypeScript）とJest
+- [JavaとJUnit](https://github.com/sil-co/dsa-java)（別プロジェクト）
+
+---
+
 ## Overview
 This repository is a personal practice project for Data Structure and Algorithms (DSA) and LeetCode problems.
 
