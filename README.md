@@ -1,6 +1,6 @@
 
 ## Overview(概要)
-This repository is a personal practice project for Data Structure and Algorithms (DSA) and LeetCode problems.
+This repository is a personal practice project for Data Structure and Algorithms (DSA) and LeetCode problems.<br/>
 (このリポジトリは、データ構造とアルゴリズム（DSA）およびLeetCodeの問題を解くための個人練習プロジェクトです。)
 
 ## Tech Stack(技術スタック)
